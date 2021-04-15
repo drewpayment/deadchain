@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "cryptosafe",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "cryptosafe": {
+      "projectType": "application",
+      "root": "apps/cryptosafe",
+      "sourceRoot": "apps/cryptosafe/src",
+      "prefix": "deadchain",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/cryptosafe",
+            "index": "apps/cryptosafe/src/index.html",
+            "main": "apps/cryptosafe/src/main.ts",
+            "polyfills": "apps/cryptosafe/src/polyfills.ts",
+            "tsConfig": "apps/cryptosafe/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/cryptosafe/src/favicon.ico",
+              "apps/cryptosafe/src/assets"
+            ],
+            "styles": ["apps/cryptosafe/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/cryptosafe/src/environments/environment.ts",
+                  "with": "apps/cryptosafe/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cryptosafe:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cryptosafe:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cryptosafe:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/cryptosafe/src/**/*.ts",
+              "apps/cryptosafe/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/cryptosafe"],
+          "options": {
+            "jestConfig": "apps/cryptosafe/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "cryptosafe-e2e": {
+      "root": "apps/cryptosafe-e2e",
+      "sourceRoot": "apps/cryptosafe-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/cryptosafe-e2e/cypress.json",
+            "tsConfig": "apps/cryptosafe-e2e/tsconfig.e2e.json",
+            "devServerTarget": "cryptosafe:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cryptosafe:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/cryptosafe-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
