@@ -109,3 +109,16 @@ ng affected:e2e
     >
   </details>
 </main>
+
+<div style="width: 100%; text-align: center !important;">
+  <div>
+    <label>Set Greeting</label>
+    <input type="text" placeholder="Enter Greeting" [formControl]="greetingControl" />
+  </div>
+
+  <br />
+
+  <div>
+    <button type="button" (click)="saveGreeting()">Save</button>
+  </div>
+</div>

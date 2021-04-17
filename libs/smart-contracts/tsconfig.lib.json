@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "../dist",
+    "types": [],
+  },
+  "include": ["./src/lib/scripts", "./src/lib/test"],
+  "files": [
+    "./src/lib/hardhat.config.ts"
+  ]
+}
