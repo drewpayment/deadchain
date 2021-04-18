@@ -28,19 +28,26 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "chain:dir": "cd ./libs/smart-contracts/src/lib",
+    "chain:compile": "cd ./libs/smart-contracts/src/lib && npx hardhat compile",
+    "chain:serve": "cd ./libs/smart-contracts/src/lib && npx hardhat node",
+    "chain:deploy:local": "cd ./libs/smart-contracts/src/lib && npx hardhat run scripts/deploy.js --network localhost"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^11.2.0",
+    "@angular/cdk": "^11.2.9",
     "@angular/common": "^11.2.0",
     "@angular/compiler": "^11.2.0",
     "@angular/core": "^11.2.0",
     "@angular/forms": "^11.2.0",
+    "@angular/material": "^11.2.9",
     "@angular/platform-browser": "^11.2.0",
     "@angular/platform-browser-dynamic": "^11.2.0",
     "@angular/router": "^11.2.0",
     "@nrwl/angular": "12.0.6",
+    "bootstrap": "^4.6.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.2"

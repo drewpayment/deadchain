@@ -36,7 +36,7 @@
       "projectType": "application",
       "root": "apps/cryptosafe",
       "sourceRoot": "apps/cryptosafe/src",
-      "prefix": "deadchain",
+      "prefix": "dc",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -51,7 +51,7 @@
               "apps/cryptosafe/src/favicon.ico",
               "apps/cryptosafe/src/assets"
             ],
-            "styles": ["apps/cryptosafe/src/styles.scss"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "apps/cryptosafe/src/styles.scss"],
             "scripts": []
           },
           "configurations": {

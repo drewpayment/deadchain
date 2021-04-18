@@ -1,0 +1,55 @@
+<!-- <div style="width: 100%; text-align: center !important;">
+  <div>
+    <label>Set Greeting</label>
+    <input type="text" placeholder="Enter Greeting" [formControl]="greetingControl" />
+  </div>
+
+  <br />
+
+  <div>
+    <button type="button" (click)="saveGreeting()">Save</button>
+
+    <button type="button" (click)="getBalance()">Get Balance</button>
+  </div>
+</div> -->
+
+<div class="container" [formGroup]="transferForm">
+  <div class="row">
+    <div class="col">
+      <p class="h2">
+        Balance: {{ currentBalance | number }} coins
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <mat-form-field>
+          <mat-label>Send To</mat-label>
+          <input matInput placeholder="0x32874923832039klejr23r23" required formControlName="toAcct" />
+          <mat-icon matSuffix>outbound</mat-icon>
+          <mat-error *ngIf="transferForm.get('toAcct').hasError('required')">
+            Destination account is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field>
+          <mat-label>Amount</mat-label>
+          <input matInput placeholder="$$$$" required formControlName="amount" />
+          <mat-icon matPrefix>attach_money</mat-icon>
+          <mat-error *ngIf="transferForm.get('amount').hasError('required')">
+            Amount is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mt-5">
+        <button class="mr-5" mat-raised-button type="button" (click)="clear()">Cancel</button>
+
+        <button class="ml-5" mat-raised-button color="primary" type="button" (click)="sendCoins()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

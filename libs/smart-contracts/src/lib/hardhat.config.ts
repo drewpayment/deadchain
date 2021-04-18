@@ -1,5 +1,6 @@
 import '@nomiclabs/hardhat-waffle';
 import { HardhatUserConfig } from 'hardhat/types/config';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { environment } from '../../../shared/src/lib/constants/environment';
 
 // You need to export an object to set up your config
