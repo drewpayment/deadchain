@@ -116,14 +116,15 @@ export class DappComponent {
       console.log(`${balance}`);
 
       this.currentBalance = coerceNumberProperty(balance);
-    });
+    }, err => console.dir(err));
   }
 
   sendCoins() {
     if (this.transferForm.invalid) return;
     const fv = this.transferForm.value;
     const userAccount = fv.toAcct;
-    const amount = fv.amount;
+    const amountInput = fv.amount || '0';
+    const amount = coerceNumberProperty(amountInput.replace(/\D/g,''));
 
     this.tokenContract.transfer(userAccount, amount).then((transaction) =>
       transaction.wait().then(
@@ -132,14 +133,26 @@ export class DappComponent {
             `${fv.amount} coins successfully sent to ${fv.userAccount}`,
             'dismiss',
             {
-              duration: 3500,
+              duration: 5000,
             }
           );
+
+          this.transferForm.reset({
+            toAcct: '',
+            amount: '',
+          });
         },
         (err) => {
           console.dir(err);
         }
-      )
+      ),
+      err => {
+        if (!err) return;
+
+        this.snack.open(`${err.message}`, 'dismiss', {
+          duration: 10000,
+        });
+      }
     );
   }
 
